@@ -11,7 +11,7 @@ res=$(orthoani -q $genome1 -r $genome2 -j 20)
 echo $genome1 $genome2 $res
 done > a.txt
 
-sed '1i genome_1 genome_2 distance' a.txt | tr "" "\t" > ${output}.tsv ;
+sed '1i genome_1 genome_2 distance' a.txt | tr " " "\t" > ${output}.tsv ;
 rm a.txt ; 
 cat ${output}.tsv ;
 ls -lh ;
