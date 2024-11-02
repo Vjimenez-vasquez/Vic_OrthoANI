@@ -1,5 +1,6 @@
 # Vic_OrthoANI
 A collection of codes for OrthoANI distances estimations for fasta files
+ORHTO-ANI as been adapted from https://github.com/althonos/orthoani
 # step 1 : generate a file containing pairwise combinantions
 ```r
 #!/bin/bash
