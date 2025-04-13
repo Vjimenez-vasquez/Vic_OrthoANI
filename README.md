@@ -38,6 +38,18 @@ ls -lh ;
 # step3: Very nice R-plot:
 ![Captura desde 2025-04-13 12-35-29](https://github.com/user-attachments/assets/050394f1-4340-4a12-8f30-9a4af47fd559)
 ```r
+# 0.install packages
+
+# install.packages("ggplot2")
+# install.packages("igraph")
+# install.packages("reshape2")
+# install.packages("scales")
+
+library(ggplot2)
+library(igraph)
+library(reshape2)
+library(scales)
+
 # 1. read the table 
 data <- read.csv("distances_1.tsv", header=T, sep="\t")
 data$distance <- as.numeric(data$distance)
@@ -56,7 +68,6 @@ get_upper_tri <- function(cormat){
 
 # 3. transform the table into matrix 
 
-# install.packages("igraph") #
 library(igraph)
 
 pairwise <- data
@@ -82,17 +93,14 @@ melted_cormat <- melt(upper_tri, na.rm = TRUE)
 # 6. PLOT
  
 p2 <- ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
-  geom_tile(color = "white") +
-  geom_text(aes(label = round(value,2)), color = "#333333", size = 3) +
-  scale_fill_gradientn(colours = c("blue","green","red"), 
-                       values = rescale(c(89,95,100)),
-                       guide = "colorbar", limits=c(89,100),
-                       name="Ortho-ANI\ndistance") +
-
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_x_discrete(name="") + scale_y_discrete(name="") + coord_fixed() 
+      geom_tile(color = "white") +
+      geom_text(aes(label = round(value,2)), color = "#333333", size = 3) +
+      scale_fill_gradientn(colours = c("blue","green","red"), 
+      values = rescale(c(89,95,100)),
+      guide = "colorbar", limits=c(89,100),
+      name="Ortho-ANI\ndistance") +
+      theme_bw() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      scale_x_discrete(name="") + scale_y_discrete(name="") + coord_fixed() 
 p2
 ```
-
-
