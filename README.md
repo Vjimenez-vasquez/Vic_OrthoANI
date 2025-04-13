@@ -35,8 +35,10 @@ ls -lh ;
 ./command1.sh input_name_prefix.txt output_name_prefix
 ```
 
-# step3: Very nice R-plot: 
+# step3: Very nice R-plot:
 ```r
+![hextable_colors](https://github.com/user-attachments/assets/f80f07d3-453f-4d1b-81d6-e2800200c345)
+
 # 1. read the table 
 data <- read.csv("distances_1.tsv", header=T, sep="\t")
 data$distance <- as.numeric(data$distance)
