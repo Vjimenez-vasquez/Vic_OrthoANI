@@ -31,3 +31,61 @@ ls -lh ;
 ./command0.sh input_name_prefix
 ./command1.sh input_name_prefix.txt output_name_prefix
 ```
+
+# step3: Very nice R-plot: 
+```r
+# 1. read the table 
+data <- read.csv("distances_1.tsv", header=T, sep="\t")
+data$distance <- as.numeric(data$distance)
+
+# 2. load functions 
+# Get lower triangle of the correlation matrix
+get_lower_tri<-function(cormat){
+  cormat[upper.tri(cormat)] <- NA
+  return(cormat)
+}
+# Get upper triangle of the correlation matrix
+get_upper_tri <- function(cormat){
+  cormat[lower.tri(cormat)]<- NA
+  return(cormat)
+}
+
+# 3. transform the table into matrix 
+
+# install.packages("igraph") #
+library(igraph)
+
+pairwise <- data
+head(pairwise)
+g1 <- graph.data.frame(pairwise, directed=FALSE)
+matrix2 <- get.adjacency(g1, attr="distance", sparse=FALSE)
+head(matrix2)
+
+# 4. load function to reorder the comparisons and observe patterns 
+
+reorder_cormat <- function(cormat){
+  dd <- as.dist((1-cormat)/2)
+  hc <- hclust(dd)
+  cormat <-cormat[hc$order, hc$order]
+}
+
+# 5. generate the final matrix
+ 
+cormat <- reorder_cormat(matrix2)
+upper_tri <- get_upper_tri(cormat)
+melted_cormat <- melt(upper_tri, na.rm = TRUE)
+
+# 6. PLOT
+ 
+p2 <- ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile(color = "white") +
+  geom_text(aes(label = round(value,2)), color = "#333333", size = 3) +
+  scale_fill_gradientn(colours = c("blue","green","red"), 
+                       values = rescale(c(89,95,100)),
+                       guide = "colorbar", limits=c(89,100),
+                       name="Ortho-ANI\ndistance") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(name="") + scale_y_discrete(name="") + coord_fixed() 
+p2
+```
