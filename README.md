@@ -36,9 +36,8 @@ ls -lh ;
 ```
 
 # step3: Very nice R-plot:
-```r
 ![Captura desde 2025-04-13 12-35-29](https://github.com/user-attachments/assets/050394f1-4340-4a12-8f30-9a4af47fd559)
-
+```r
 # 1. read the table 
 data <- read.csv("distances_1.tsv", header=T, sep="\t")
 data$distance <- as.numeric(data$distance)
