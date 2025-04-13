@@ -1,6 +1,9 @@
 # Vic_OrthoANI
 A collection of codes for OrthoANI distances estimations for fasta files
 ORHTO-ANI as been adapted from https://github.com/althonos/orthoani
+
+![distances plot](https://github.com/user-attachments/assets/24995460-984e-4584-8e4c-b6ac3df79851)
+
 # step 1 : generate a file containing pairwise combinantions
 ```r
 #!/bin/bash
@@ -84,8 +87,11 @@ p2 <- ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) +
                        values = rescale(c(89,95,100)),
                        guide = "colorbar", limits=c(89,100),
                        name="Ortho-ANI\ndistance") +
+
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_x_discrete(name="") + scale_y_discrete(name="") + coord_fixed() 
 p2
 ```
+
+
