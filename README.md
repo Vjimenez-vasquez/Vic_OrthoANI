@@ -1,6 +1,5 @@
 # Vic_OrthoANI
-A collection of codes for OrthoANI distances estimations for fasta files
-ORHTO-ANI as been adapted from https://github.com/althonos/orthoani
+A collection of codes for OrthoANI distances estimations and plots from fasta files. ORTHO-ANI as been adapted from https://github.com/althonos/orthoani
 
 ![distances plot](https://github.com/user-attachments/assets/24995460-984e-4584-8e4c-b6ac3df79851)
 
